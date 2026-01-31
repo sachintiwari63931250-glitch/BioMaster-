@@ -33,58 +33,47 @@ if menu == "Notes":
     st.write("• Plant Physiology")
     st.write("• Human Physiology")
 elif menu == "MCQs":
-    st.header("📝 Unlimited MCQs Practice")
+    st.header("🧠 Auto MCQ Answer (Class 9–12)")
 
-    if "mcqs" not in st.session_state:
-        st.session_state.mcqs = []
+    q = st.text_area("Enter MCQ Question (English)")
 
-    st.subheader("➕ Add New MCQ")
+    if st.button("Get Answer"):
+        q_lower = q.lower()
 
-    q = st.text_input("Question")
-    opt1 = st.text_input("Option A")
-    opt2 = st.text_input("Option B")
-    opt3 = st.text_input("Option C")
-    opt4 = st.text_input("Option D")
-    correct = st.selectbox(
-        "Correct Answer",
-        ["Option A", "Option B", "Option C", "Option D"]
-    )
+        # --- Biology ---
+        if "powerhouse" in q_lower:
+            st.success("Answer: Mitochondria")
+        elif "chlorophyll" in q_lower:
+            st.success("Answer: Chloroplast")
+        elif "heart" in q_lower and "chambers" in q_lower:
+            st.success("Answer: 4")
+        elif "photosynthesis" in q_lower:
+            st.success("Answer: Chloroplast")
+        elif "dna" in q_lower:
+            st.success("Answer: Nucleus")
 
-    if st.button("Add MCQ"):
-        if q and opt1 and opt2 and opt3 and opt4:
-            st.session_state.mcqs.append({
-                "question": q,
-                "options": [opt1, opt2, opt3, opt4],
-                "answer": {
-                    "Option A": opt1,
-                    "Option B": opt2,
-                    "Option C": opt3,
-                    "Option D": opt4
-                }[correct]
-            })
-            st.success("MCQ Added Successfully ✅")
+        # --- Physics ---
+        elif "unit of force" in q_lower:
+            st.success("Answer: Newton")
+        elif "speed of light" in q_lower:
+            st.success("Answer: 3 × 10⁸ m/s")
+        elif "ohm" in q_lower:
+            st.success("Answer: Resistance")
+
+        # --- Chemistry ---
+        elif "atomic number" in q_lower:
+            st.success("Answer: Number of protons")
+        elif "ph" in q_lower and "acid" in q_lower:
+            st.success("Answer: Less than 7")
+        elif "h2o" in q_lower:
+            st.success("Answer: Water")
+
         else:
-            st.error("Please fill all fields ❌")
-
-    st.markdown("---")
-    st.subheader("📘 Practice MCQs")
-
-    score = 0
-
-    for i, mcq in enumerate(st.session_state.mcqs):
-        user_ans = st.radio(
-            f"Q{i+1}. {mcq['question']}",
-            mcq["options"],
-            key=f"mcq_{i}"
-        )
-        if user_ans == mcq["answer"]:
-            score += 1
-
-    if st.session_state.mcqs:
-        st.success(f"Score: {score} / {len(st.session_state.mcqs)}")
-    else:
-        st.info("No MCQs added yet")
-
+            st.warning(
+                "Answer not found in offline logic.\n"
+                "AI integration required for full coverage."
+            )
+   
 
 elif menu == "PDF Viewer":
     st.header("PDF Viewer")
