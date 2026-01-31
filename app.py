@@ -38,3 +38,12 @@ elif menu == "📄 PDF Viewer":
 elif menu == "📷 Photo Doubt Solver":
     st.header("Photo Doubt Solver")
     st.info("Image upload karke doubt pooch sakte ho")
+elif menu == "📷 Photo Doubt Solver":
+    st.header("Photo Doubt Solver")
+    img = st.file_uploader(
+        "Upload image (JPG / PNG)",
+        type=["jpg", "png", "jpeg"]
+    )
+    if img:
+        st.image(img, caption="Uploaded Image", use_column_width=True)
+        st.success("Image uploaded successfully ✅")
