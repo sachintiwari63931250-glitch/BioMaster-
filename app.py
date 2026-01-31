@@ -47,3 +47,16 @@ elif menu == "📷 Photo Doubt Solver":
     if img:
         st.image(img, caption="Uploaded Image", use_column_width=True)
         st.success("Image uploaded successfully ✅")
+elif menu == "📝 MCQs":
+    st.header("MCQs Practice")
+
+    q1 = st.radio(
+        "Q1. Powerhouse of the cell is?",
+        ["Nucleus", "Mitochondria", "Ribosome", "Golgi body"]
+    )
+
+    if st.button("Check Answer"):
+        if q1 == "Mitochondria":
+            st.success("Correct ✅")
+        else:
+            st.error("Wrong ❌ Correct answer: Mitochondria")
